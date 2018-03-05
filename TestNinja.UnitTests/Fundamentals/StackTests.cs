@@ -90,6 +90,5 @@ namespace TestNinja.UnitTests
 
 			Assert.That(_stack.Count, Is.EqualTo(3));
 		}
-
 	}
 }
