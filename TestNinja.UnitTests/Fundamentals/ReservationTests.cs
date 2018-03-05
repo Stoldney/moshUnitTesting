@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using TestNinja.Fundamentals;
 
-
-namespace TestNinja.UnitTests
+namespace TestNinja.UnitTests.Fundamentals
 {
 	[TestFixture]
+	[Category("Fundamentals")]
 	internal class ReservationTests
 	{
 		[Test]

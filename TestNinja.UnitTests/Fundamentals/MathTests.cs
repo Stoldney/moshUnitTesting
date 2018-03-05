@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using TestNinja;
+﻿using NUnit.Framework;
 using Math = TestNinja.Fundamentals.Math;
 
-namespace TestNinja.UnitTests
+namespace TestNinja.UnitTests.Fundamentals
 {
 	[TestFixture]
+	[Category("Fundamentals")]
 	internal class MathTests
 	{
 		private Math _math;

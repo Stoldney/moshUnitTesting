@@ -2,9 +2,10 @@
 using NUnit.Framework.Internal;
 using TestNinja.Fundamentals;
 
-namespace TestNinja.UnitTests
+namespace TestNinja.UnitTests.Fundamentals
 {
 	[TestFixture()]
+	[Category("Fundamentals")]
 	internal class FizzBuzzTests
 	{
 		[Test]
