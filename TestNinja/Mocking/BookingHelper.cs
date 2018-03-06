@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace TestNinja.Mocking
 {
-    public static class BookingHelper
+	public static class BookingHelper
     {
         public static string OverlappingBookingsExist(Booking bookingToCheck, IBookingRepository repository)
         {
@@ -28,14 +27,6 @@ namespace TestNinja.Mocking
 		    return overlappingBooking;
 	    }
 	}
-
-    public class UnitOfWork
-    {
-        public IQueryable<T> Query<T>()
-        {
-            return new List<T>().AsQueryable();
-        }
-    }
 
     public class Booking
     {
