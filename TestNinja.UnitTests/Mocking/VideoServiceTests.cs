@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Design;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -12,12 +13,19 @@ namespace TestNinja.UnitTests.Mocking
 	{
 		private VideoService _videoService;
 		private Mock<IFileReader> _fileReader;
+		private Mock<IVideoRepository> _repository;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_fileReader = new Mock<IFileReader>();
-			_videoService = new VideoService { FileReader = _fileReader.Object };
+			_repository = new Mock<IVideoRepository>();
+
+			_videoService = new VideoService
+			{
+				FileReader = _fileReader.Object,
+				VideoRepository = _repository.Object
+			};
 		}
 
 		[Test]
@@ -28,7 +36,31 @@ namespace TestNinja.UnitTests.Mocking
 			var result = _videoService.ReadVideoTitle();
 
 			Assert.That(result, Does.Contain("error").IgnoreCase);
+		}
 
+		[Test]
+		public void GetUnprocessedVideosAsCsv_AllVideosProcessed_ReturnAnEmptyString()
+		{
+			_repository.Setup(r => r.GetUnprocessedVideos()).Returns(new List<Video>());
+
+			var result = _videoService.GetUnprocessedVideosAsCsv();
+
+			Assert.That(result, Is.EqualTo(""));
+		}
+
+		[Test]
+		public void GetUnprocessedVideosAsCsv_AFewUnprocessedVideos_ReturnAStringWithIdsOfUnprocessedVideos()
+		{
+			_repository.Setup(r => r.GetUnprocessedVideos()).Returns(new List<Video>
+			{
+				new Video{Id = 1},
+				new Video{Id = 2},
+				new Video{Id = 3}
+			});
+
+			var result = _videoService.GetUnprocessedVideosAsCsv();
+
+			Assert.That(result, Is.EqualTo("1,2,3"));
 		}
 	}
 }
