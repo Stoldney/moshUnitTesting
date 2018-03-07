@@ -7,6 +7,7 @@ using TestNinja.Mocking;
 namespace TestNinja.UnitTests.Mocking
 {
 	[TestFixture]
+	[Category("Mocking")]
 	internal class InstallerHelperTests
 	{
 		private Mock<IFileDownloader> _fileDownloader;
